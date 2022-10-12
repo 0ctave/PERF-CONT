@@ -36,7 +36,7 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     movie_pb2_grpc.add_MovieServicer_to_server(MovieServicer(), server)
-    server.add_insecure_port('[::]:3001')
+    server.add_insecure_port('[::]:3101')
     server.start()
     server.wait_for_termination()
 
