@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  movie1:
+    build: ./movie/
+    ports:
+      - "5001:5001"
+  movie2:
+    build: ./movie/
+    ports:
+      - "5002:5001"
+  movie3:
+    build: ./movie/
+    ports:
+      - "5003:5001"
+  movie4:
+    build: ./movie/
+    ports:
+      - "5004:5001"
+  movie5:
+    build: ./movie/
+    ports:
+      - "5005:5001"
+  movie6:
+    build: ./movie/
+    ports:
+      - "5006:5001"
+  movie7:
+    build: ./movie/
+    ports:
+      - "5007:5001"
+  movie8:
+    build: ./movie/
+    ports:
+      - "5008:5001"
+  movie9:
+    build: ./movie/
+    ports:
+      - "5009:5001"
+  nginx:
+    build: ./nginx/
+    ports:
+      - "8000:8000"
+  nginx2:
+    build: ./nginx2/
+    ports:
+      - "8001:8000"

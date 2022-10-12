@@ -14,7 +14,7 @@ IMDB_API_KEY = os.getenv('IMDB_KEY')
 
 app = Flask(__name__)
 
-PORT = 3200
+PORT = 3001
 HOST = '0.0.0.0'
 # IMDb variables
 IMDB_LINK = f"https://imdb-api.com/en/API/"
@@ -156,3 +156,5 @@ if __name__ == "__main__":
     # p = sys.argv[1]
     print("Server running in port %s" % PORT)
     app.run(host=HOST, port=PORT)
+
+
