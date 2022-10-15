@@ -1,7 +1,7 @@
 import grpc
 from concurrent import futures
-import pb2.movie_pb2 as movie_pb2
-import pb2.movie_pb2_grpc as movie_pb2_grpc
+from protos import movie_pb2
+from protos import movie_pb2_grpc
 import json
 
 class MovieServicer(movie_pb2_grpc.MovieServicer):
@@ -36,7 +36,7 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     movie_pb2_grpc.add_MovieServicer_to_server(MovieServicer(), server)
-    server.add_insecure_port('[::]:3101')
+    server.add_insecure_port('[::]:3002')
     server.start()
     server.wait_for_termination()
 

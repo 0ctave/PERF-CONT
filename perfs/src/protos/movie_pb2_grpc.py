@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import base_pb2 as base__pb2
-import movie_pb2 as movie__pb2
+from protos import base_pb2 as protos_dot_base__pb2
+from protos import movie_pb2 as protos_dot_movie__pb2
 
 
 class MovieStub(object):
@@ -17,23 +17,23 @@ class MovieStub(object):
         """
         self.GetMovieByID = channel.unary_unary(
                 '/Movie/GetMovieByID',
-                request_serializer=movie__pb2.MovieID.SerializeToString,
-                response_deserializer=movie__pb2.MovieData.FromString,
+                request_serializer=protos_dot_movie__pb2.MovieID.SerializeToString,
+                response_deserializer=protos_dot_movie__pb2.MovieData.FromString,
                 )
         self.GetListMovies = channel.unary_stream(
                 '/Movie/GetListMovies',
-                request_serializer=base__pb2.Empty.SerializeToString,
-                response_deserializer=movie__pb2.MovieData.FromString,
+                request_serializer=protos_dot_base__pb2.Empty.SerializeToString,
+                response_deserializer=protos_dot_movie__pb2.MovieData.FromString,
                 )
         self.GetMoviesByTitle = channel.unary_stream(
                 '/Movie/GetMoviesByTitle',
-                request_serializer=movie__pb2.MovieTitle.SerializeToString,
-                response_deserializer=movie__pb2.MovieData.FromString,
+                request_serializer=protos_dot_movie__pb2.MovieTitle.SerializeToString,
+                response_deserializer=protos_dot_movie__pb2.MovieData.FromString,
                 )
         self.GetMoviesByDirector = channel.unary_stream(
                 '/Movie/GetMoviesByDirector',
-                request_serializer=movie__pb2.MovieDirector.SerializeToString,
-                response_deserializer=movie__pb2.MovieData.FromString,
+                request_serializer=protos_dot_movie__pb2.MovieDirector.SerializeToString,
+                response_deserializer=protos_dot_movie__pb2.MovieData.FromString,
                 )
 
 
@@ -69,23 +69,23 @@ def add_MovieServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetMovieByID': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMovieByID,
-                    request_deserializer=movie__pb2.MovieID.FromString,
-                    response_serializer=movie__pb2.MovieData.SerializeToString,
+                    request_deserializer=protos_dot_movie__pb2.MovieID.FromString,
+                    response_serializer=protos_dot_movie__pb2.MovieData.SerializeToString,
             ),
             'GetListMovies': grpc.unary_stream_rpc_method_handler(
                     servicer.GetListMovies,
-                    request_deserializer=base__pb2.Empty.FromString,
-                    response_serializer=movie__pb2.MovieData.SerializeToString,
+                    request_deserializer=protos_dot_base__pb2.Empty.FromString,
+                    response_serializer=protos_dot_movie__pb2.MovieData.SerializeToString,
             ),
             'GetMoviesByTitle': grpc.unary_stream_rpc_method_handler(
                     servicer.GetMoviesByTitle,
-                    request_deserializer=movie__pb2.MovieTitle.FromString,
-                    response_serializer=movie__pb2.MovieData.SerializeToString,
+                    request_deserializer=protos_dot_movie__pb2.MovieTitle.FromString,
+                    response_serializer=protos_dot_movie__pb2.MovieData.SerializeToString,
             ),
             'GetMoviesByDirector': grpc.unary_stream_rpc_method_handler(
                     servicer.GetMoviesByDirector,
-                    request_deserializer=movie__pb2.MovieDirector.FromString,
-                    response_serializer=movie__pb2.MovieData.SerializeToString,
+                    request_deserializer=protos_dot_movie__pb2.MovieDirector.FromString,
+                    response_serializer=protos_dot_movie__pb2.MovieData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -109,8 +109,8 @@ class Movie(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Movie/GetMovieByID',
-            movie__pb2.MovieID.SerializeToString,
-            movie__pb2.MovieData.FromString,
+            protos_dot_movie__pb2.MovieID.SerializeToString,
+            protos_dot_movie__pb2.MovieData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -126,8 +126,8 @@ class Movie(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Movie/GetListMovies',
-            base__pb2.Empty.SerializeToString,
-            movie__pb2.MovieData.FromString,
+            protos_dot_base__pb2.Empty.SerializeToString,
+            protos_dot_movie__pb2.MovieData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -143,8 +143,8 @@ class Movie(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Movie/GetMoviesByTitle',
-            movie__pb2.MovieTitle.SerializeToString,
-            movie__pb2.MovieData.FromString,
+            protos_dot_movie__pb2.MovieTitle.SerializeToString,
+            protos_dot_movie__pb2.MovieData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -160,7 +160,7 @@ class Movie(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Movie/GetMoviesByDirector',
-            movie__pb2.MovieDirector.SerializeToString,
-            movie__pb2.MovieData.FromString,
+            protos_dot_movie__pb2.MovieDirector.SerializeToString,
+            protos_dot_movie__pb2.MovieData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

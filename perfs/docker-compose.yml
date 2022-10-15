@@ -1,15 +1,15 @@
 version: "3.9"
 services:
-  movie:
+  movie-rest:
     build: ./services/REST/movie/
     ports:
       - "3001:3001"
-  showtime:
+  movie-grpc:
     build: ./services/gRPC/movie/
     ports:
       - "3002:3002"
-  booking:
+  movie-graphql:
     build: ./services/GraphQL/movie/
     ports:
-        - "3003:3003"
+      - "3003:3003"
 
