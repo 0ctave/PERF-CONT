@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from custom_time import timeit
 
 urls = {
+    '1service': 'http://localhost:5001',
     '4services':'http://localhost:8000',
     '9services':'http://localhost:8001',
     '9services_lc':'http://localhost:8002',
@@ -19,7 +20,7 @@ def getX(url,nb):
       nb: number of requests
     """
     rs = (grequests.get(url) for _ in range(nb))
-    grequests.map(rs)
+    res = grequests.map(rs,size=1000)
 
 
 def compareTimes(url):
@@ -33,7 +34,7 @@ def compareTimes(url):
     Returns:
       A list of the execution times for each n in N.
     """
-    N = [x**3 for x in range(1,10)]
+    N = [x**3 for x in range(1,15,3)]
     execution_times = [getX(url,n) for n in N]
     return N,execution_times
   
@@ -52,11 +53,16 @@ def main():
     print("Getting times for 9 services being loadbalanced w/ least-conn algorithm")
     N3,T3 = compareTimes(urls['9services_lc'])
     print("Done.")
+
+    print("Getting times for 1 no nginx")
+    N3,T4 = compareTimes(urls['1service'])
+    print("Done.")
     
     # Plotting things
     plt.plot(N,T,label="4")
     plt.plot(N,T2,label="9")
     plt.plot(N,T3,label="9 least_conn")
+    plt.plot(N,T4,label="1")
 
     plt.ylabel('ellapsed time')
     plt.yscale('linear')
