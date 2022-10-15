@@ -26,13 +26,14 @@ Cette partie vise à utiliser le load balancer du proxy inversé de NGINX pour r
 ## Dockerization
 
 Executer `docker-compose up` dans le dossier services
-Publiera 9 copies du service simple movie (REST), et deux container NGINX, le premier balancant la charge sur 4 services, l'autres sur 9.
+Publiera 9 copies du service simple movie (REST), et trois container NGINX, le premier balancant la charge sur 4 services, l'autres sur 9, le dernier sur 9 avec une repartition de la charge suivant un algorithme de moindre connexion active.
 
 | Service | Port      |
 | ------- | --------- |
 | movie   | 5001-5009 |
 | nginx   | 8000      |
 | nginx2  | 8001      |
+| nginx3  | 8002      |
 
 # Comment tester ?
 

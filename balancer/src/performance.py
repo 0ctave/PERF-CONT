@@ -5,7 +5,8 @@ from custom_time import timeit
 
 urls = {
     '4services':'http://localhost:8000',
-    '9services':'http://localhost:8001'
+    '9services':'http://localhost:8001',
+    '9services_lc':'http://localhost:8002',
 }
 
 @timeit(verbose=False)
@@ -32,7 +33,7 @@ def compareTimes(url):
     Returns:
       A list of the execution times for each n in N.
     """
-    N = [x**3 for x in range(5,12)]
+    N = [x**3 for x in range(1,10)]
     execution_times = [getX(url,n) for n in N]
     return N,execution_times
   
@@ -47,10 +48,15 @@ def main():
     print("Getting times for 9 services being loadbalanced")
     N2,T2 = compareTimes(urls['9services'])
     print("Done.")
+
+    print("Getting times for 9 services being loadbalanced w/ least-conn algorithm")
+    N3,T3 = compareTimes(urls['9services_lc'])
+    print("Done.")
     
     # Plotting things
     plt.plot(N,T,label="4")
-    plt.plot(N2,T2,label="9")
+    plt.plot(N,T2,label="9")
+    plt.plot(N,T3,label="9 least_conn")
 
     plt.ylabel('ellapsed time')
     plt.yscale('linear')
